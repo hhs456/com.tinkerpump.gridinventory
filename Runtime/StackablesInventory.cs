@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using Toolkid.UIGrid;
-using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.Profiling;
 using UnityEngine.Serialization;
@@ -25,7 +23,10 @@ public class StackablesInventory : MonoBehaviour, IPageable
     [SerializeField] protected int currentPage;
     [SerializeField] protected int pageCount;    
     [SerializeField] protected bool isLoop;
-    
+    [SerializeField]
+    protected string[] ids;
+
+
     private List<ItemSlot> slots = new List<ItemSlot>();
 
 
@@ -37,8 +38,7 @@ public class StackablesInventory : MonoBehaviour, IPageable
         //}
         GridSystem.Initializes(pageSize);
         PageCount = count / (pageSize.x * pageSize.y);
-        slots.Clear();
-        string[] ids = new string[] { "Generalitem_Common_Agriculture_Normal_Cashseed_002", "Generalitem_Common_Agriculture_Normal_Cashseed_001", "Generalitem_Common_Agriculture_Normal_Cashseed_005", "Generalitem_Common_Agriculture_Normal_Cashseed_007" };
+        slots.Clear();        
         for (int i = 0; i < GridSystem.GridCount.y; i++) {
             for (int j = 0; j < count; j++) {
                 ItemSlot slot = new ItemSlot(Instantiate(slotPrefab).GetComponent<RawImage>());
